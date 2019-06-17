@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button } from 'antd'
-import logo from './images/logo.png'
+import { Form, Icon, Input, Button, message} from 'antd'
+import { Redirect } from 'react-router-dom'
+import { reqLogin } from '../../api'
+import memoryUtil from '../../utils/memoryUtil'
+import logo from '../../assets/images/logo.png'
 import './login.less'
 
 class Login extends Component {
@@ -8,9 +11,19 @@ class Login extends Component {
     handleSubmit = e => {
         e.preventDefault()
         //表单验证
-        this.props.form.validateFields( (err, values) => {
+        this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                console.log('successful');
+                const {username, password} = values
+                let result = await reqLogin(username, password)
+                if (result.status === 0) {
+                    const user = result.data
+                    localStorage.setItem('USER', JSON.stringify(user))
+                    memoryUtil.user = user
+                    message.success(`欢迎回来${memoryUtil.user.username}`,2)
+                    this.props.history.replace('/')
+                } else {
+                    message.error(result.msg, 2)
+                }
             }
         })
     }
@@ -19,8 +32,8 @@ class Login extends Component {
         value = value.trim()
         if (!value) {
             callback('请输密码') 
-        } else if (value.length < 6){
-            callback('密码长度最小不能小于6位')
+        } else if (value.length < 4){
+            callback('密码长度最小不能小于4位')
         } else if (value.length > 16){
             callback('密码长度最大不能大于16位')
         } else if (!/^[a-zA-Z0-9_]+$/.test(value)){
@@ -31,6 +44,11 @@ class Login extends Component {
     }
 
     render() {
+
+        if (memoryUtil.user._id) {
+            return <Redirect to="/" />
+        }
+
         const { getFieldDecorator } = this.props.form;
         return (
             <div className='login'>
