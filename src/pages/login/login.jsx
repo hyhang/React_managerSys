@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, message} from 'antd'
 import { Redirect } from 'react-router-dom'
+
+import { saveUser } from '../../utils/storageUtil'
 import { reqLogin } from '../../api'
 import memoryUtil from '../../utils/memoryUtil'
 import logo from '../../assets/images/logo.png'
@@ -17,7 +19,7 @@ class Login extends Component {
                 let result = await reqLogin(username, password)
                 if (result.status === 0) {
                     const user = result.data
-                    localStorage.setItem('USER', JSON.stringify(user))
+                    saveUser( user)
                     memoryUtil.user = user
                     message.success(`欢迎回来${memoryUtil.user.username}`,2)
                     this.props.history.replace('/')

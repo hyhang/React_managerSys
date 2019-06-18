@@ -26,7 +26,6 @@ class LeftNav extends Component {
                 const selectItem = item.children.find( item => item.key === path)
                 if (selectItem) {
                     this.openKey = item.key
-                    console.log(path)
                 }
                 return (
                     <SubMenu

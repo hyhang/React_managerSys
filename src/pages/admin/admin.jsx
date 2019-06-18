@@ -13,15 +13,16 @@ import User from '../user/user'
 import Bar from '../charts/bar'
 import Line from '../charts/line'
 import Pie from '../charts/pie'
+import Header from '../../components/header/';
 
-const { Header, Footer, Sider, Content } = Layout
+const {  Footer, Sider, Content } = Layout
 export default class Admin extends Component {
     render() {
 
-        if (!memoryUtil.user._id) {
+        if (!memoryUtil.user) {
             return <Redirect to='/login'/>
         }
-
+        
         return (
             <Layout style={{height: '100%'}}>
                 <Sider style={{backgroundColor: 'white'}}>
