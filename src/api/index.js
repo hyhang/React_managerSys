@@ -9,6 +9,12 @@ export const reqLogin =  (username, password) => ajax(BASE + '/login' , {usernam
 //获取商品分类一级（二级）列表
 export const reqCategory = (parentId) => ajax(BASE + '/manage/category/list', {parentId})
 
+//修改分类名称
+export const reqUpdateCategory = (categoryId, categoryName) => ajax(BASE +'manage/category/update', {categoryId, categoryName},'POST')
+
+//添加分类
+export const reqAddCategory = (categoryName, parentId) => ajax(BASE + 'manage/category/add' ,{categoryName, parentId}, 'POST')
+
 //Jsonp请求百度天气信息
 
 export const reqWeather = city => {
