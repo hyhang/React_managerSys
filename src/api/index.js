@@ -15,6 +15,24 @@ export const reqUpdateCategory = (categoryId, categoryName) => ajax(BASE +'manag
 //添加分类
 export const reqAddCategory = (categoryName, parentId) => ajax(BASE + 'manage/category/add' ,{categoryName, parentId}, 'POST')
 
+//获取商品信息
+export const reqProducts = ({pageNum, pageSize}) => ajax(BASE + '/manage/product/list' , {pageNum, pageSize})
+
+//根据搜索关键字查找商品
+export const reqSearchProducts = ({
+    pageNum,
+    pageSize,
+    searchType,
+    keyWord
+}) =>ajax(BASE + '/manage/product/search' , {
+        pageNum, 
+        pageSize,
+        [searchType]: keyWord
+    })
+
+//修改商品上下架信息
+export const reqUpdateStatus = ( productId, status ) => ajax(BASE + 'manage/product/updateStatus', {productId, status}, 'POST')
+
 //Jsonp请求百度天气信息
 
 export const reqWeather = city => {
