@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 
+import './product.less'
 import ProductHome from './home'
-import ProductDetail from './detial'
+import ProductDetail from './detail'
 import ProductAddUpdate from './addupdate'
 /**
  * 商品管理
