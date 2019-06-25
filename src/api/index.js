@@ -58,6 +58,15 @@ export const reqUpdateStatus = (productId, status) => ajax(BASE + 'manage/produc
 //根据id获取分类
 export const reqCategoryById = (categoryId) => ajax(BASE + '/manage/category/info', {categoryId})
 
+//删除上传图片
+export const reqDeletePicture = (name) => ajax(BASE + '/manage/img/delete', {name}, 'POST')
+
+//更新(添加)商品
+export const reqAddOrUpdate = (product) => ajax(BASE + '/manage/product/' + (product._id ? 'update' : 'add'), product, 'POST')
+
+//获取用户列表
+export const reqUserList = () => ajax(BASE + '/manage/user/list')
+
 //Jsonp请求百度天气信息
 
 export const reqWeather = city => {

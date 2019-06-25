@@ -105,10 +105,14 @@ export default class Category extends Component {
         title: '操作',
         width: 300,
         render : (category) => {
+          console.log(category)
           return (
             <span>
               <LinkButton onClick={() => this.showUpdate(category)}>修改分类</LinkButton>
-              <LinkButton onClick={()=>this.showSubCategory(category)}>查看子分类</LinkButton>
+              {category.parentId === '0' ? 
+                <LinkButton onClick={()=>this.showSubCategory(category)}>查看子分类</LinkButton>
+                : null
+              }
             </span>
           )
         }
